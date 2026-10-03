@@ -1,5 +1,5 @@
 /* ==========================================================
-   ONG Mãos Solidárias - folha de estilos
+   ONG Mãos Solidárias - folha de estilos (versão SPA)
    1. Design system (variáveis)   5. Navegação
    2. Base                        6. Componentes
    3. Layout (Grid de 12 colunas) 7. Formulários
@@ -227,11 +227,6 @@ img {
 }
 
 /* ---------- 5. Navegação ---------- */
-.menu-toggle {
-  position: absolute;
-  opacity: 0;
-}
-
 .menu-botao {
   display: flex;
   flex-direction: column;
@@ -240,6 +235,7 @@ img {
   width: 44px;
   height: 44px;
   padding: var(--espaco-1);
+  background: none;
   border: 2px solid var(--cor-primaria);
   border-radius: var(--raio);
   cursor: pointer;
@@ -253,21 +249,16 @@ img {
   transition: transform var(--transicao), opacity var(--transicao);
 }
 
-.menu-toggle:focus-visible + .menu-botao {
-  outline: 3px solid var(--cor-secundaria-escura);
-  outline-offset: 2px;
-}
-
-/* O "X" do menu aberto */
-.menu-toggle:checked + .menu-botao .menu-botao__linha:nth-child(2) {
+/* O "X" do menu aberto: o JavaScript alterna o atributo aria-expanded */
+.menu-botao[aria-expanded="true"] .menu-botao__linha:nth-child(2) {
   transform: translateY(8px) rotate(45deg);
 }
 
-.menu-toggle:checked + .menu-botao .menu-botao__linha:nth-child(3) {
+.menu-botao[aria-expanded="true"] .menu-botao__linha:nth-child(3) {
   opacity: 0;
 }
 
-.menu-toggle:checked + .menu-botao .menu-botao__linha:nth-child(4) {
+.menu-botao[aria-expanded="true"] .menu-botao__linha:nth-child(4) {
   transform: translateY(-8px) rotate(-45deg);
 }
 
@@ -276,7 +267,8 @@ img {
   width: 100%;
 }
 
-.menu-toggle:checked ~ .menu {
+/* Classe adicionada pelo JavaScript */
+.menu--aberto {
   display: block;
 }
 
@@ -570,7 +562,7 @@ img {
   font-weight: var(--peso-forte);
 }
 
-/* Modal (aberto pelo seletor :target, sem JavaScript) */
+/* Modal (a classe modal--aberto é controlada pelo JavaScript) */
 .modal {
   position: fixed;
   inset: 0;
@@ -585,7 +577,7 @@ img {
   transition: opacity var(--transicao), visibility var(--transicao);
 }
 
-.modal:target {
+.modal--aberto {
   visibility: visible;
   opacity: 1;
 }
@@ -614,7 +606,9 @@ img {
   border-radius: 50%;
   font-size: var(--fonte-lg);
   color: var(--cor-neutra-700);
-  text-decoration: none;
+  background: none;
+  border: 0;
+  cursor: pointer;
 }
 
 .modal__fechar:hover {
@@ -624,6 +618,11 @@ img {
 
 .modal__acoes {
   margin-top: var(--espaco-3);
+}
+
+/* Classe aplicada ao <body> enquanto o modal está aberto */
+.sem-rolagem {
+  overflow: hidden;
 }
 
 /* Aviso flutuante (toast) */
@@ -648,7 +647,7 @@ img {
   transition: opacity var(--transicao), transform var(--transicao), visibility var(--transicao);
 }
 
-.toast:target {
+.toast--visivel {
   visibility: visible;
   opacity: 1;
   transform: translateY(0);
@@ -658,8 +657,14 @@ img {
   margin: 0;
 }
 
-.toast a {
+.toast__fechar {
+  padding: var(--espaco-1);
+  font: inherit;
   color: var(--cor-destaque);
+  text-decoration: underline;
+  background: none;
+  border: 0;
+  cursor: pointer;
 }
 
 /* ---------- 7. Formulários ---------- */
@@ -729,19 +734,27 @@ img {
   color: var(--cor-erro);
 }
 
-/* Feedback visual: só aparece depois que a pessoa digita */
-.campo input[placeholder]:not(:placeholder-shown):valid {
-  border-color: var(--cor-sucesso);
-  background-color: var(--cor-sucesso-fundo);
-}
-
-.campo input[placeholder]:not(:placeholder-shown):invalid {
+/* Feedback visual: as classes campo--erro e campo--valido são
+   aplicadas pelo JavaScript depois de validar cada campo */
+.campo--erro > input,
+.campo--erro > select {
   border-color: var(--cor-erro);
   background-color: var(--cor-erro-fundo);
 }
 
-.campo input[placeholder]:not(:placeholder-shown):invalid ~ .campo__erro {
+.campo--valido > input,
+.campo--valido > select {
+  border-color: var(--cor-sucesso);
+  background-color: var(--cor-sucesso-fundo);
+}
+
+.campo--erro > .campo__erro,
+fieldset.campo--erro > .campo__erro {
   display: block;
+}
+
+.formulario fieldset.campo--erro {
+  border-color: var(--cor-erro);
 }
 
 .opcoes {
@@ -768,6 +781,69 @@ img {
   display: flex;
   flex-wrap: wrap;
   gap: var(--espaco-2);
+}
+
+/* Filtros de projetos */
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-1);
+  margin-bottom: var(--espaco-3);
+}
+
+.filtro {
+  min-height: 44px;
+  padding: var(--espaco-1) var(--espaco-2);
+  font: inherit;
+  font-weight: var(--peso-medio);
+  color: var(--cor-primaria-escura);
+  background-color: var(--cor-branco);
+  border: 2px solid var(--cor-primaria);
+  border-radius: var(--raio-pilula);
+  cursor: pointer;
+  transition: background-color var(--transicao), color var(--transicao);
+}
+
+.filtro:hover {
+  background-color: var(--cor-primaria-clara);
+}
+
+.filtro[aria-pressed="true"] {
+  background-color: var(--cor-primaria);
+  color: var(--cor-branco);
+}
+
+/* Gráfico (Chart.js) */
+.grafico {
+  position: relative;
+  height: 240px;
+  max-width: 32rem;
+  margin-bottom: var(--espaco-1);
+  padding: var(--espaco-2);
+  background-color: var(--cor-branco);
+  border: 1px solid var(--cor-neutra-300);
+  border-radius: var(--raio);
+}
+
+/* Listas e estados vazios */
+.lista-simples {
+  margin: 0 0 var(--espaco-3);
+  padding: 0;
+  list-style: none;
+}
+
+.vazio {
+  grid-column: span 12;
+  padding: var(--espaco-4);
+  text-align: center;
+  color: var(--cor-neutra-700);
+  background-color: var(--cor-branco);
+  border: 2px dashed var(--cor-neutra-300);
+  border-radius: var(--raio);
+}
+
+#conteudo:focus {
+  outline: none;
 }
 
 /* ---------- 8. Breakpoints (mobile first) ---------- */
