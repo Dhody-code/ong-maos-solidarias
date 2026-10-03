@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ONG Mãos Solidárias | Guia de componentes</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="pular-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="cabecalho">
+    <div class="container cabecalho__conteudo">
+      <a class="marca" href="index.html">
+        <img src="imagens/logo.png" alt="" width="48" height="48">
+        <span>ONG Mãos Solidárias</span>
+      </a>
+
+      <input type="checkbox" id="menu-toggle" class="menu-toggle">
+      <label for="menu-toggle" class="menu-botao">
+        <span class="sr-only">Abrir ou fechar o menu</span>
+        <span class="menu-botao__linha"></span>
+        <span class="menu-botao__linha"></span>
+        <span class="menu-botao__linha"></span>
+      </label>
+
+      <nav class="menu" aria-label="Navegação principal">
+        <ul class="menu__lista">
+          <li><a class="menu__link" href="index.html">Início</a></li>
+          <li class="menu__item--submenu">
+            <a class="menu__link" href="projetos.html">Projetos</a>
+            <ul class="submenu">
+              <li><a href="projetos.html#projetos">Nossos projetos</a></li>
+              <li><a href="projetos.html#voluntariado">Voluntariado</a></li>
+              <li><a href="projetos.html#doacoes">Doações</a></li>
+            </ul>
+          </li>
+          <li><a class="menu__link" href="cadastro.html">Cadastro</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero">
+      <div class="container">
+        <h1>Guia de componentes</h1>
+        <p class="hero__texto">Referência visual dos componentes do design system da ONG Mãos Solidárias.</p>
+      </div>
+    </section>
+
+    <section id="etiquetas" class="secao secao--clara">
+      <div class="container">
+        <h2>Etiquetas</h2>
+        <p>Categorizam projetos e sinalizam situações.</p>
+        <div class="etiquetas">
+          <span class="etiqueta">Educação</span>
+          <span class="etiqueta">Alimentação</span>
+          <span class="etiqueta">Capacitação</span>
+          <span class="etiqueta etiqueta--destaque">Mais procurado</span>
+          <span class="etiqueta etiqueta--sucesso">Vagas abertas</span>
+          <span class="etiqueta etiqueta--erro">Vagas encerradas</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="alertas" class="secao">
+      <div class="container">
+        <h2>Alertas</h2>
+        <div class="alerta alerta--info" role="note">
+          <p><strong>Informação:</strong> a próxima reunião de integração será no sábado, às 10h.</p>
+        </div>
+        <div class="alerta alerta--sucesso" role="note">
+          <p><strong>Sucesso:</strong> seu cadastro foi recebido pela equipe.</p>
+        </div>
+        <div class="alerta alerta--aviso" role="note">
+          <p><strong>Atenção:</strong> as inscrições deste projeto terminam em breve.</p>
+        </div>
+        <div class="alerta alerta--erro" role="note">
+          <p><strong>Erro:</strong> não foi possível enviar o formulário. Revise os campos destacados.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="botoes" class="secao secao--clara">
+      <div class="container">
+        <h2>Botões</h2>
+        <div class="formulario__acoes">
+          <button class="botao botao--primario" type="button">Primário</button>
+          <button class="botao botao--destaque" type="button">Destaque</button>
+          <button class="botao botao--contorno" type="button">Contorno</button>
+          <button class="botao" type="button" disabled>Desabilitado</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="janelas" class="secao">
+      <div class="container">
+        <h2>Modal e aviso flutuante</h2>
+        <p>Os dois são abertos por links, com o seletor :target.</p>
+        <div class="formulario__acoes">
+          <a class="botao botao--primario" href="#modal-exemplo">Abrir modal</a>
+          <a class="botao botao--contorno" href="#toast-exemplo">Mostrar aviso flutuante</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="modal-exemplo" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-exemplo-titulo">
+    <div class="modal__caixa">
+      <a class="modal__fechar" href="#janelas" aria-label="Fechar janela">&times;</a>
+      <h2 id="modal-exemplo-titulo">Confirmar inscrição</h2>
+      <p>Você está se inscrevendo como voluntário no projeto Educar para Transformar.</p>
+      <div class="etiquetas">
+        <span class="etiqueta">Educação</span>
+        <span class="etiqueta etiqueta--sucesso">Vagas abertas</span>
+      </div>
+      <div class="formulario__acoes modal__acoes">
+        <a class="botao botao--primario" href="#toast-exemplo">Confirmar</a>
+        <a class="botao botao--contorno" href="#janelas">Cancelar</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-exemplo" class="toast" role="status">
+    <p>Inscrição confirmada com sucesso.</p>
+    <a href="#janelas">Fechar</a>
+  </div>
+
+  <footer class="rodape">
+    <div class="container rodape__conteudo">
+      <address>
+        <p>E-mail: <a href="mailto:contato@maossolidarias.org.br">contato@maossolidarias.org.br</a></p>
+        <p>Telefone: <a href="tel:+551100000000">(11) 0000-0000</a></p>
+      </address>
+      <p><a href="componentes.html">Guia de componentes</a></p>
+      <p>&copy; 2026 ONG Mãos Solidárias. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+</body>
+</html>
