@@ -4,58 +4,118 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ONG Mãos Solidárias | Início</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header>
-    <img src="imagens/logo.png" alt="Logotipo da ONG Mãos Solidárias" width="96" height="96">
-    <h1>ONG Mãos Solidárias</h1>
-    <nav aria-label="Navegação principal">
-      <ul>
-        <li><a href="index.html" aria-current="page">Início</a></li>
-        <li><a href="projetos.html">Projetos Sociais</a></li>
-        <li><a href="cadastro.html">Cadastro</a></li>
-      </ul>
-    </nav>
+  <a class="pular-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="cabecalho">
+    <div class="container cabecalho__conteudo">
+      <a class="marca" href="index.html">
+        <img src="imagens/logo.png" alt="" width="48" height="48">
+        <span>ONG Mãos Solidárias</span>
+      </a>
+
+      <input type="checkbox" id="menu-toggle" class="menu-toggle">
+      <label for="menu-toggle" class="menu-botao">
+        <span class="sr-only">Abrir ou fechar o menu</span>
+        <span class="menu-botao__linha"></span>
+        <span class="menu-botao__linha"></span>
+        <span class="menu-botao__linha"></span>
+      </label>
+
+      <nav class="menu" aria-label="Navegação principal">
+        <ul class="menu__lista">
+          <li><a class="menu__link menu__link--ativo" href="index.html" aria-current="page">Início</a></li>
+          <li class="menu__item--submenu">
+            <a class="menu__link" href="projetos.html">Projetos</a>
+            <ul class="submenu">
+              <li><a href="projetos.html#projetos">Nossos projetos</a></li>
+              <li><a href="projetos.html#voluntariado">Voluntariado</a></li>
+              <li><a href="projetos.html#doacoes">Doações</a></li>
+            </ul>
+          </li>
+          <li><a class="menu__link" href="cadastro.html">Cadastro</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <main>
-    <section id="sobre">
-      <h2>Quem somos</h2>
-      <picture>
-        <source srcset="imagens/voluntarios.webp" type="image/webp">
-        <img src="imagens/voluntarios.jpg" alt="Ilustração de cinco pessoas de mãos dadas sob um coração, representando a união dos voluntários da ONG" width="800" height="450">
-      </picture>
-      <p>A ONG Mãos Solidárias é uma organização sem fins lucrativos que apoia famílias em situação de vulnerabilidade social, promovendo educação, alimentação e cidadania.</p>
+  <main id="conteudo">
+    <section class="hero">
+      <div class="container">
+        <h1>ONG Mãos Solidárias</h1>
+        <p class="hero__texto">Apoiamos famílias em situação de vulnerabilidade social com educação, alimentação e cidadania.</p>
+        <div class="hero__acoes">
+          <a class="botao botao--destaque" href="cadastro.html">Quero ser voluntário</a>
+          <a class="botao botao--contorno" href="projetos.html#doacoes">Como doar</a>
+        </div>
+      </div>
     </section>
 
-    <section id="missao">
-      <h2>Missão, visão e valores</h2>
-      <article>
-        <h3>Missão</h3>
-        <p>Transformar realidades por meio de projetos sociais e do trabalho voluntário.</p>
-      </article>
-      <article>
-        <h3>Visão</h3>
-        <p>Ser referência regional em ações de impacto social sustentável.</p>
-      </article>
-      <article>
-        <h3>Valores</h3>
-        <p>Solidariedade, transparência, respeito e compromisso com a comunidade.</p>
-      </article>
+    <section id="sobre" class="secao secao--clara">
+      <div class="container grade grade--centro">
+        <div class="col-lg-6">
+          <h2>Quem somos</h2>
+          <p>A ONG Mãos Solidárias é uma organização sem fins lucrativos que apoia famílias em situação de vulnerabilidade social, promovendo educação, alimentação e cidadania.</p>
+          <div class="alerta alerta--info" role="note">
+            <p><strong>Campanha do agasalho:</strong> recebemos doações de roupas e cobertores em nossa sede.</p>
+          </div>
+        </div>
+        <picture class="col-lg-6">
+          <source srcset="imagens/voluntarios.webp" type="image/webp">
+          <img src="imagens/voluntarios.jpg" alt="Ilustração de cinco pessoas de mãos dadas sob um coração, representando a união dos voluntários da ONG" width="800" height="450">
+        </picture>
+      </div>
     </section>
 
-    <section id="contato">
-      <h2>Contato</h2>
-      <address>
-        <p>Endereço: Rua da Esperança, 123 - Centro, São Paulo/SP</p>
-        <p>Telefone: <a href="tel:+551100000000">(11) 0000-0000</a></p>
-        <p>E-mail: <a href="mailto:contato@maossolidarias.org.br">contato@maossolidarias.org.br</a></p>
-      </address>
+    <section id="missao" class="secao">
+      <div class="container">
+        <h2>Missão, visão e valores</h2>
+        <div class="grade">
+          <article class="cartao col-md-6 col-lg-4">
+            <div class="cartao__corpo">
+              <h3>Missão</h3>
+              <p>Transformar realidades por meio de projetos sociais e do trabalho voluntário.</p>
+            </div>
+          </article>
+          <article class="cartao col-md-6 col-lg-4">
+            <div class="cartao__corpo">
+              <h3>Visão</h3>
+              <p>Ser referência regional em ações de impacto social sustentável.</p>
+            </div>
+          </article>
+          <article class="cartao col-md-6 col-lg-4">
+            <div class="cartao__corpo">
+              <h3>Valores</h3>
+              <p>Solidariedade, transparência, respeito e compromisso com a comunidade.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="secao secao--clara">
+      <div class="container">
+        <h2>Contato</h2>
+        <address>
+          <p>Endereço: Rua da Esperança, 123 - Centro, São Paulo/SP</p>
+          <p>Telefone: <a href="tel:+551100000000">(11) 0000-0000</a></p>
+          <p>E-mail: <a href="mailto:contato@maossolidarias.org.br">contato@maossolidarias.org.br</a></p>
+        </address>
+      </div>
     </section>
   </main>
 
-  <footer>
-    <p>&copy; 2026 ONG Mãos Solidárias. Todos os direitos reservados.</p>
+  <footer class="rodape">
+    <div class="container rodape__conteudo">
+      <address>
+        <p>E-mail: <a href="mailto:contato@maossolidarias.org.br">contato@maossolidarias.org.br</a></p>
+        <p>Telefone: <a href="tel:+551100000000">(11) 0000-0000</a></p>
+      </address>
+      <p><a href="componentes.html">Guia de componentes</a></p>
+      <p>&copy; 2026 ONG Mãos Solidárias. Todos os direitos reservados.</p>
+    </div>
   </footer>
 </body>
 </html>

@@ -4,78 +4,166 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ONG Mãos Solidárias | Projetos Sociais</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header>
-    <img src="imagens/logo.png" alt="Logotipo da ONG Mãos Solidárias" width="96" height="96">
-    <h1>Projetos sociais da ONG Mãos Solidárias</h1>
-    <nav aria-label="Navegação principal">
-      <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="projetos.html" aria-current="page">Projetos Sociais</a></li>
-        <li><a href="cadastro.html">Cadastro</a></li>
-      </ul>
-    </nav>
+  <a class="pular-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="cabecalho">
+    <div class="container cabecalho__conteudo">
+      <a class="marca" href="index.html">
+        <img src="imagens/logo.png" alt="" width="48" height="48">
+        <span>ONG Mãos Solidárias</span>
+      </a>
+
+      <input type="checkbox" id="menu-toggle" class="menu-toggle">
+      <label for="menu-toggle" class="menu-botao">
+        <span class="sr-only">Abrir ou fechar o menu</span>
+        <span class="menu-botao__linha"></span>
+        <span class="menu-botao__linha"></span>
+        <span class="menu-botao__linha"></span>
+      </label>
+
+      <nav class="menu" aria-label="Navegação principal">
+        <ul class="menu__lista">
+          <li><a class="menu__link" href="index.html">Início</a></li>
+          <li class="menu__item--submenu">
+            <a class="menu__link menu__link--ativo" href="projetos.html" aria-current="page">Projetos</a>
+            <ul class="submenu">
+              <li><a href="projetos.html#projetos">Nossos projetos</a></li>
+              <li><a href="projetos.html#voluntariado">Voluntariado</a></li>
+              <li><a href="projetos.html#doacoes">Doações</a></li>
+            </ul>
+          </li>
+          <li><a class="menu__link" href="cadastro.html">Cadastro</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <main>
-    <section id="projetos">
-      <h2>Nossos projetos</h2>
-      <article>
-        <h3>Educar para Transformar</h3>
-        <picture>
-          <source srcset="imagens/projeto-educacao.webp" type="image/webp">
-          <img src="imagens/projeto-educacao.jpg" alt="Ilustração de um livro aberto, símbolo do projeto de reforço escolar" width="600" height="400">
-        </picture>
-        <p>Reforço escolar e oficinas de leitura para crianças e adolescentes.</p>
-      </article>
-      <article>
-        <h3>Mesa Cheia</h3>
-        <picture>
-          <source srcset="imagens/projeto-alimentacao.webp" type="image/webp">
-          <img src="imagens/projeto-alimentacao.jpg" alt="Ilustração de uma cesta com alimentos, símbolo do projeto de distribuição de cestas básicas" width="600" height="400">
-        </picture>
-        <p>Arrecadação e entrega mensal de cestas básicas a famílias cadastradas.</p>
-      </article>
-      <article>
-        <h3>Futuro Profissional</h3>
-        <picture>
-          <source srcset="imagens/projeto-capacitacao.webp" type="image/webp">
-          <img src="imagens/projeto-capacitacao.jpg" alt="Ilustração de um computador portátil, símbolo do projeto de capacitação profissional" width="600" height="400">
-        </picture>
-        <p>Cursos gratuitos de informática e preparação para o mercado de trabalho.</p>
-      </article>
+  <main id="conteudo">
+    <section class="hero">
+      <div class="container">
+        <h1>Projetos sociais da ONG Mãos Solidárias</h1>
+        <p class="hero__texto">Conheça nossas frentes de atuação e escolha como participar.</p>
+      </div>
     </section>
 
-    <section id="voluntariado">
-      <h2>Voluntariado</h2>
-      <p>Qualquer pessoa maior de 16 anos pode doar parte do seu tempo aos nossos projetos.</p>
-      <h3>Como se tornar voluntário</h3>
-      <ol>
-        <li>Escolha o projeto com o qual deseja colaborar.</li>
-        <li>Preencha o <a href="cadastro.html">formulário de cadastro</a>.</li>
-        <li>Aguarde o contato da equipe para a reunião de integração.</li>
-      </ol>
+    <section id="projetos" class="secao">
+      <div class="container">
+        <h2>Nossos projetos</h2>
+        <div class="grade">
+          <article class="cartao col-md-6 col-lg-4">
+            <picture>
+              <source srcset="imagens/projeto-educacao.webp" type="image/webp">
+              <img class="cartao__imagem" src="imagens/projeto-educacao.jpg" alt="Ilustração de um livro aberto, símbolo do projeto de reforço escolar" width="600" height="400">
+            </picture>
+            <div class="cartao__corpo">
+              <div class="etiquetas">
+                <span class="etiqueta">Educação</span>
+                <span class="etiqueta etiqueta--sucesso">Vagas abertas</span>
+              </div>
+              <h3>Educar para Transformar</h3>
+              <p>Reforço escolar e oficinas de leitura para crianças e adolescentes.</p>
+              <div class="cartao__acoes">
+                <a class="botao botao--contorno" href="cadastro.html">Quero participar</a>
+              </div>
+            </div>
+          </article>
+          <article class="cartao col-md-6 col-lg-4">
+            <picture>
+              <source srcset="imagens/projeto-alimentacao.webp" type="image/webp">
+              <img class="cartao__imagem" src="imagens/projeto-alimentacao.jpg" alt="Ilustração de uma cesta com alimentos, símbolo do projeto de distribuição de cestas básicas" width="600" height="400">
+            </picture>
+            <div class="cartao__corpo">
+              <div class="etiquetas">
+                <span class="etiqueta">Alimentação</span>
+                <span class="etiqueta etiqueta--destaque">Mais procurado</span>
+              </div>
+              <h3>Mesa Cheia</h3>
+              <p>Arrecadação e entrega mensal de cestas básicas a famílias cadastradas.</p>
+              <div class="cartao__acoes">
+                <a class="botao botao--contorno" href="cadastro.html">Quero participar</a>
+              </div>
+            </div>
+          </article>
+          <article class="cartao col-md-6 col-lg-4">
+            <picture>
+              <source srcset="imagens/projeto-capacitacao.webp" type="image/webp">
+              <img class="cartao__imagem" src="imagens/projeto-capacitacao.jpg" alt="Ilustração de um computador portátil, símbolo do projeto de capacitação profissional" width="600" height="400">
+            </picture>
+            <div class="cartao__corpo">
+              <div class="etiquetas">
+                <span class="etiqueta">Capacitação</span>
+              </div>
+              <h3>Futuro Profissional</h3>
+              <p>Cursos gratuitos de informática e preparação para o mercado de trabalho.</p>
+              <div class="cartao__acoes">
+                <a class="botao botao--contorno" href="cadastro.html">Quero participar</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <section id="doacoes">
-      <h2>Doações</h2>
-      <p>Sua contribuição mantém os projetos em funcionamento.</p>
-      <h3>Formas de doar</h3>
-      <ul>
-        <li><strong>PIX:</strong> chave doacoes@maossolidarias.org.br</li>
-        <li><strong>Transferência bancária:</strong> dados enviados após o cadastro.</li>
-        <li><strong>Doação de itens:</strong> alimentos, livros e material escolar em nossa sede.</li>
-      </ul>
+    <section id="voluntariado" class="secao secao--clara">
+      <div class="container grade">
+        <div class="col-lg-6">
+          <h2>Voluntariado</h2>
+          <p>Qualquer pessoa maior de 16 anos pode doar parte do seu tempo aos nossos projetos.</p>
+        </div>
+        <div class="col-lg-6">
+          <h3>Como se tornar voluntário</h3>
+          <ol class="passos">
+            <li>Escolha o projeto com o qual deseja colaborar.</li>
+            <li><span>Preencha o <a href="cadastro.html">formulário de cadastro</a>.</span></li>
+            <li>Aguarde o contato da equipe para a reunião de integração.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="doacoes" class="secao">
+      <div class="container">
+        <h2>Doações</h2>
+        <p>Sua contribuição mantém os projetos em funcionamento.</p>
+        <h3>Formas de doar</h3>
+        <ul>
+          <li><strong>PIX:</strong> chave doacoes@maossolidarias.org.br</li>
+          <li><strong>Transferência bancária:</strong> dados enviados após o cadastro.</li>
+          <li><strong>Doação de itens:</strong> alimentos, livros e material escolar em nossa sede.</li>
+        </ul>
+        <a class="botao botao--primario" href="#modal-pix">Ver instruções do PIX</a>
+      </div>
     </section>
   </main>
 
-  <footer>
-    <address>
-      <p>E-mail: <a href="mailto:contato@maossolidarias.org.br">contato@maossolidarias.org.br</a></p>
-      <p>Telefone: <a href="tel:+551100000000">(11) 0000-0000</a></p>
-    </address>
-    <p>&copy; 2026 ONG Mãos Solidárias. Todos os direitos reservados.</p>
+  <div id="modal-pix" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-pix-titulo">
+    <div class="modal__caixa">
+      <a class="modal__fechar" href="#doacoes" aria-label="Fechar janela">&times;</a>
+      <h2 id="modal-pix-titulo">Doação por PIX</h2>
+      <ol class="passos">
+        <li>Abra o aplicativo do seu banco e escolha a opção PIX.</li>
+        <li>Informe a chave doacoes@maossolidarias.org.br.</li>
+        <li>Confira o nome da ONG e confirme o valor.</li>
+      </ol>
+      <div class="alerta alerta--sucesso" role="note">
+        <p>Toda doação é registrada e divulgada em nossa prestação de contas.</p>
+      </div>
+      <a class="botao botao--primario" href="#doacoes">Entendi</a>
+    </div>
+  </div>
+
+  <footer class="rodape">
+    <div class="container rodape__conteudo">
+      <address>
+        <p>E-mail: <a href="mailto:contato@maossolidarias.org.br">contato@maossolidarias.org.br</a></p>
+        <p>Telefone: <a href="tel:+551100000000">(11) 0000-0000</a></p>
+      </address>
+      <p><a href="componentes.html">Guia de componentes</a></p>
+      <p>&copy; 2026 ONG Mãos Solidárias. Todos os direitos reservados.</p>
+    </div>
   </footer>
 </body>
 </html>
