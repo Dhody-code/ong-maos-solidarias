@@ -1,0 +1,9 @@
+# Dependências e versão de produção (geradas por npm install e npm run build)
+node_modules/
+dist/
+
+# Sistema operacional e editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
