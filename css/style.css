@@ -842,6 +842,12 @@ fieldset.campo--erro > .campo__erro {
   border-radius: var(--raio);
 }
 
+#conteudo {
+  /* Reserva a altura da tela: o rodapé não "pula" quando o JavaScript
+     troca o aviso de carregamento pelo conteúdo da rota (evita layout shift). */
+  min-height: 100vh;
+}
+
 #conteudo:focus {
   outline: none;
 }
