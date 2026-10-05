@@ -4,6 +4,13 @@ Todas as mudanças relevantes deste projeto ficam registradas aqui.
 O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/)
 e as versões seguem o [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [1.0.1] - 2026-10-03
+
+### Corrigido
+
+- O rodapé mudava de posição durante o carregamento da página (layout shift).
+- Erro 404 no console por falta do ícone do site (favicon).
+
 ## [1.0.0] - 2026-10-03
 
 ### Adicionado
