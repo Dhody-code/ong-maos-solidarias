@@ -5,6 +5,17 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test js/testes/validacao.test.js js/testes/roteador.test.js js/testes/tema.test.js"
+    "start": "node scripts/servidor.mjs .",
+    "test": "node --test js/testes/validacao.test.js js/testes/roteador.test.js js/testes/tema.test.js",
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/servidor.mjs dist"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "html-minifier-terser": "^7.2.0",
+    "sharp": "^0.35.5"
   }
 }
