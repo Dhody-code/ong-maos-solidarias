@@ -5,6 +5,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test js/testes/validacao.test.js js/testes/roteador.test.js"
+    "test": "node --test js/testes/validacao.test.js js/testes/roteador.test.js js/testes/tema.test.js"
   }
 }

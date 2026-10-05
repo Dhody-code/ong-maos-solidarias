@@ -16,6 +16,7 @@
   --cor-secundaria: #f4a261;
   --cor-secundaria-escura: #9a4a0f;
   --cor-destaque: #ffd166;
+  --cor-texto-sobre-destaque: #1f2933;
   /* Tons neutros */
   --cor-neutra-900: #1f2933;
   --cor-neutra-700: #3e4c59;
@@ -32,6 +33,10 @@
   --cor-aviso-fundo: #fff4d6;
   --cor-info: #1d4e89;
   --cor-info-fundo: #e3eefb;
+  /* Rodapé */
+  --cor-rodape-fundo: #1f2933;
+  --cor-rodape-texto: #cbd2d9;
+  --cor-rodape-link: #ffffff;
 
   /* Tipografia */
   --fonte-familia: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -143,7 +148,7 @@ img {
   z-index: 200;
   padding: var(--espaco-1) var(--espaco-2);
   background-color: var(--cor-destaque);
-  color: var(--cor-neutra-900);
+  color: var(--cor-texto-sobre-destaque);
   border-radius: var(--raio);
 }
 
@@ -212,18 +217,43 @@ img {
 
 .rodape {
   padding-block: var(--espaco-4);
-  background-color: var(--cor-neutra-900);
-  color: var(--cor-neutra-300);
+  background-color: var(--cor-rodape-fundo);
+  color: var(--cor-rodape-texto);
 }
 
 .rodape a {
-  color: var(--cor-branco);
+  color: var(--cor-rodape-link);
 }
 
 .rodape__conteudo {
   display: flex;
   flex-direction: column;
   gap: var(--espaco-2);
+}
+
+/* Barra de acessibilidade (seletor de tema) */
+.barra-acessibilidade {
+  background-color: var(--cor-neutra-100);
+  border-bottom: 1px solid var(--cor-neutra-300);
+  font-size: var(--fonte-xs);
+}
+
+.barra-acessibilidade__conteudo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--espaco-1);
+  padding-block: 4px;
+}
+
+.barra-acessibilidade select {
+  min-height: 32px;
+  padding: 2px var(--espaco-1);
+  font: inherit;
+  color: var(--cor-neutra-900);
+  background-color: var(--cor-branco);
+  border: 2px solid var(--cor-neutra-500);
+  border-radius: var(--raio);
 }
 
 /* ---------- 5. Navegação ---------- */
@@ -385,12 +415,12 @@ img {
 
 .botao--destaque {
   background-color: var(--cor-destaque);
-  color: var(--cor-neutra-900);
+  color: var(--cor-texto-sobre-destaque);
 }
 
 .botao--destaque:hover {
   background-color: var(--cor-secundaria);
-  color: var(--cor-neutra-900);
+  color: var(--cor-texto-sobre-destaque);
 }
 
 .botao--contorno {
@@ -483,7 +513,7 @@ img {
 
 .etiqueta--destaque {
   background-color: var(--cor-destaque);
-  color: var(--cor-neutra-900);
+  color: var(--cor-texto-sobre-destaque);
 }
 
 .etiqueta--sucesso {
@@ -660,7 +690,7 @@ img {
 .toast__fechar {
   padding: var(--espaco-1);
   font: inherit;
-  color: var(--cor-destaque);
+  color: inherit;
   text-decoration: underline;
   background: none;
   border: 0;
@@ -720,6 +750,12 @@ img {
   outline: none;
   border-color: var(--cor-primaria);
   box-shadow: 0 0 0 3px var(--cor-primaria-clara);
+}
+
+.campo input::placeholder,
+.campo textarea::placeholder {
+  color: var(--cor-neutra-500);
+  opacity: 1;
 }
 
 .campo__dica {
@@ -962,6 +998,123 @@ fieldset.campo--erro > .campo__erro {
   .hero__texto {
     font-size: var(--fonte-lg);
   }
+}
+
+/* ---------- 9. Temas ---------- */
+/* O JavaScript define o atributo data-tema no <html>. Como todo o CSS usa
+   variáveis, cada tema só precisa redefinir os valores. */
+
+[data-tema="escuro"] {
+  color-scheme: dark;
+  --cor-primaria: #4fd1c5;
+  --cor-primaria-escura: #99f6e4;
+  --cor-primaria-clara: #134e4a;
+  --cor-secundaria: #9a4a0f;
+  --cor-secundaria-escura: #fdba74;
+  --cor-destaque: #7c5a00;
+  --cor-texto-sobre-destaque: #ffffff;
+  --cor-neutra-900: #f1f5f9;
+  --cor-neutra-700: #cbd5e1;
+  --cor-neutra-500: #94a3b8;
+  --cor-neutra-300: #3b4754;
+  --cor-neutra-100: #111820;
+  --cor-branco: #1b242c;
+  --cor-sucesso: #86efac;
+  --cor-sucesso-fundo: #14321f;
+  --cor-erro: #fca5a5;
+  --cor-erro-fundo: #3f1515;
+  --cor-aviso: #fcd34d;
+  --cor-aviso-fundo: #3a2e0a;
+  --cor-info: #93c5fd;
+  --cor-info-fundo: #142a45;
+  --cor-rodape-fundo: #0b1116;
+  --cor-rodape-texto: #cbd5e1;
+  --cor-rodape-link: #ffffff;
+  --sombra-1: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --sombra-2: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+/* No tema escuro o destaque inicial usa um degradê escuro com texto claro */
+[data-tema="escuro"] .hero {
+  background: linear-gradient(135deg, #0f2f2d, #134e4a);
+  color: var(--cor-neutra-900);
+}
+
+[data-tema="escuro"] .hero h1,
+[data-tema="escuro"] .hero .botao--contorno {
+  color: var(--cor-neutra-900);
+}
+
+[data-tema="alto-contraste"] {
+  color-scheme: dark;
+  --cor-primaria: #ffff00;
+  --cor-primaria-escura: #ffff00;
+  --cor-primaria-clara: #000000;
+  --cor-secundaria: #ffffff;
+  --cor-secundaria-escura: #00ffff;
+  --cor-destaque: #00ffff;
+  --cor-texto-sobre-destaque: #000000;
+  --cor-neutra-900: #ffffff;
+  --cor-neutra-700: #ffffff;
+  --cor-neutra-500: #ffffff;
+  --cor-neutra-300: #ffffff;
+  --cor-neutra-100: #000000;
+  --cor-branco: #000000;
+  --cor-sucesso: #00ff00;
+  --cor-sucesso-fundo: #000000;
+  --cor-erro: #ff8080;
+  --cor-erro-fundo: #000000;
+  --cor-aviso: #ffff00;
+  --cor-aviso-fundo: #000000;
+  --cor-info: #00ffff;
+  --cor-info-fundo: #000000;
+  --cor-rodape-fundo: #000000;
+  --cor-rodape-texto: #ffffff;
+  --cor-rodape-link: #ffff00;
+  --sombra-1: none;
+  --sombra-2: none;
+}
+
+/* No alto contraste as áreas são separadas por bordas, não por tons de fundo */
+[data-tema="alto-contraste"] .hero {
+  background: #000000;
+  color: #ffffff;
+  border-block: 2px solid #ffffff;
+}
+
+[data-tema="alto-contraste"] .hero h1 {
+  color: #ffff00;
+}
+
+[data-tema="alto-contraste"] .hero .botao--contorno {
+  color: #ffff00;
+}
+
+[data-tema="alto-contraste"] .rodape,
+[data-tema="alto-contraste"] .cabecalho {
+  border-block: 2px solid #ffffff;
+}
+
+[data-tema="alto-contraste"] .modal__caixa,
+[data-tema="alto-contraste"] .toast,
+[data-tema="alto-contraste"] .alerta,
+[data-tema="alto-contraste"] .etiqueta {
+  border: 2px solid currentColor;
+}
+
+[data-tema="alto-contraste"] .toast {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+[data-tema="alto-contraste"] .botao:disabled {
+  background-color: #000000;
+  color: #ffffff;
+  border: 2px dashed #ffffff;
+}
+
+[data-tema="alto-contraste"] a {
+  text-decoration-thickness: 2px;
 }
 
 /* Respeita quem prefere menos animação */

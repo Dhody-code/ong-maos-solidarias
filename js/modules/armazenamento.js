@@ -4,6 +4,7 @@
 const PREFIXO = 'maos-solidarias:';
 const CHAVE_APOIADORES = `${PREFIXO}apoiadores`;
 const CHAVE_RASCUNHO = `${PREFIXO}rascunho`;
+const CHAVE_TEMA = `${PREFIXO}tema`;
 
 function ler(chave, padrao) {
   try {
@@ -66,4 +67,14 @@ export function salvarRascunho(dados) {
 
 export function limparRascunho() {
   apagar(CHAVE_RASCUNHO);
+}
+
+/* ---------- Tema (claro, escuro ou alto contraste) ---------- */
+
+export function lerTema() {
+  return ler(CHAVE_TEMA, null);
+}
+
+export function salvarTema(tema) {
+  return gravar(CHAVE_TEMA, tema);
 }

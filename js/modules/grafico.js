@@ -3,6 +3,7 @@
 // chama apenas desenharGraficoDeApoio().
 
 let grafico = null;
+let ultimoDesenho = null; // guarda canvas e dados para redesenhar ao trocar o tema
 
 export function contarPorApoio(apoiadores) {
   return apoiadores.reduce((contagem, apoiador) => {
@@ -15,6 +16,7 @@ export function desenharGraficoDeApoio(canvas, apoiadores) {
   // Remove o gráfico anterior: evita duplicatas e instâncias presas a um canvas que já saiu da tela.
   grafico?.destroy();
   grafico = null;
+  ultimoDesenho = canvas ? { canvas, apoiadores } : null;
 
   // Se a biblioteca não carregou, a página continua funcionando sem o gráfico.
   if (!canvas || typeof window.Chart === 'undefined') return false;
@@ -52,3 +54,10 @@ export function desenharGraficoDeApoio(canvas, apoiadores) {
   });
   return true;
 }
+
+// As cores do gráfico vêm das variáveis CSS; ao trocar o tema ele é redesenhado.
+document.addEventListener('tema:alterado', () => {
+  if (ultimoDesenho?.canvas.isConnected) {
+    desenharGraficoDeApoio(ultimoDesenho.canvas, ultimoDesenho.apoiadores);
+  }
+});
