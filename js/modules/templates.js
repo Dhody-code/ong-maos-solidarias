@@ -34,7 +34,7 @@ export function cartaoProjeto(projeto) {
         <h3>${escaparHTML(projeto.titulo)}</h3>
         <p>${escaparHTML(projeto.descricao)}</p>
         <div class="cartao__acoes">
-          <a class="botao botao--contorno" href="#/cadastro?projeto=${projeto.id}">Quero participar</a>
+          <a class="botao botao--contorno" href="#/cadastro?projeto=${projeto.id}">Quero participar<span class="sr-only"> do projeto ${escaparHTML(projeto.titulo)}</span></a>
         </div>
       </div>
     </article>`;
@@ -83,7 +83,7 @@ function cartaoApoiador(apoiador) {
         <p>${escaparHTML(apoiador.cidade)}/${escaparHTML(apoiador.estado)} · cadastro em ${data}</p>
         <div class="cartao__acoes">
           <button class="botao botao--contorno" type="button" data-acao="remover-apoiador"
-            data-id="${escaparHTML(apoiador.id)}" data-nome="${escaparHTML(apoiador.nome)}">Remover</button>
+            data-id="${escaparHTML(apoiador.id)}" data-nome="${escaparHTML(apoiador.nome)}">Remover<span class="sr-only"> o cadastro de ${escaparHTML(apoiador.nome)}</span></button>
         </div>
       </div>
     </li>`;
@@ -205,7 +205,7 @@ export function paginaCadastro({ estados, formasDeApoio, projetos }) {
   const radios = formasDeApoio
     .map(
       ({ valor, rotulo }) =>
-        `<label class="opcao"><input type="radio" name="apoio" value="${valor}"> ${rotulo}</label>`,
+        `<label class="opcao"><input type="radio" name="apoio" value="${valor}" required> ${rotulo}</label>`,
     )
     .join('');
   const areas = projetos
@@ -233,30 +233,30 @@ export function paginaCadastro({ estados, formasDeApoio, projetos }) {
           <fieldset>
             <legend>Dados pessoais</legend>
             <div class="grade">
-              ${campo({ id: 'nome', rotulo: 'Nome completo *', coluna: 'col-md-6', controle: entrada('nome', 'text', 'autocomplete="name" maxlength="100"') })}
-              ${campo({ id: 'email', rotulo: 'E-mail *', coluna: 'col-md-6', controle: entrada('email', 'email', 'autocomplete="email" placeholder="nome@exemplo.com"') })}
-              ${campo({ id: 'cpf', rotulo: 'CPF *', coluna: 'col-md-4', controle: entrada('cpf', 'text', 'inputmode="numeric" placeholder="000.000.000-00" maxlength="14"') })}
-              ${campo({ id: 'telefone', rotulo: 'Telefone *', coluna: 'col-md-4', controle: entrada('telefone', 'tel', 'autocomplete="tel" placeholder="(11) 91234-5678" maxlength="15"') })}
-              ${campo({ id: 'nascimento', rotulo: 'Data de nascimento *', coluna: 'col-md-4', controle: entrada('nascimento', 'date') })}
+              ${campo({ id: 'nome', rotulo: 'Nome completo *', coluna: 'col-md-6', controle: entrada('nome', 'text', 'autocomplete="name" maxlength="100" required') })}
+              ${campo({ id: 'email', rotulo: 'E-mail *', coluna: 'col-md-6', controle: entrada('email', 'email', 'autocomplete="email" placeholder="nome@exemplo.com" required') })}
+              ${campo({ id: 'cpf', rotulo: 'CPF *', coluna: 'col-md-4', controle: entrada('cpf', 'text', 'inputmode="numeric" placeholder="000.000.000-00" maxlength="14" required') })}
+              ${campo({ id: 'telefone', rotulo: 'Telefone *', coluna: 'col-md-4', controle: entrada('telefone', 'tel', 'autocomplete="tel" placeholder="(11) 91234-5678" maxlength="15" required') })}
+              ${campo({ id: 'nascimento', rotulo: 'Data de nascimento *', coluna: 'col-md-4', controle: entrada('nascimento', 'date', 'autocomplete="bday" required') })}
             </div>
           </fieldset>
 
           <fieldset>
             <legend>Endereço</legend>
             <div class="grade">
-              ${campo({ id: 'cep', rotulo: 'CEP *', coluna: 'col-md-4', controle: entrada('cep', 'text', 'inputmode="numeric" autocomplete="postal-code" placeholder="00000-000" maxlength="9"') })}
-              ${campo({ id: 'endereco', rotulo: 'Endereço *', coluna: 'col-md-8', controle: entrada('endereco', 'text', 'autocomplete="address-line1" placeholder="Rua, número e complemento" maxlength="120"') })}
-              ${campo({ id: 'cidade', rotulo: 'Cidade *', coluna: 'col-md-8', controle: entrada('cidade', 'text', 'autocomplete="address-level2" maxlength="60"') })}
+              ${campo({ id: 'cep', rotulo: 'CEP *', coluna: 'col-md-4', controle: entrada('cep', 'text', 'inputmode="numeric" autocomplete="postal-code" placeholder="00000-000" maxlength="9" required') })}
+              ${campo({ id: 'endereco', rotulo: 'Endereço *', coluna: 'col-md-8', controle: entrada('endereco', 'text', 'autocomplete="address-line1" placeholder="Rua, número e complemento" maxlength="120" required') })}
+              ${campo({ id: 'cidade', rotulo: 'Cidade *', coluna: 'col-md-8', controle: entrada('cidade', 'text', 'autocomplete="address-level2" maxlength="60" required') })}
               ${campo({
                 id: 'estado',
                 rotulo: 'Estado *',
                 coluna: 'col-md-4',
-                controle: `<select id="estado" name="estado" aria-describedby="erro-estado"><option value="">Selecione</option>${opcoesDeEstado}</select>`,
+                controle: `<select id="estado" name="estado" autocomplete="address-level1" aria-describedby="erro-estado" required><option value="">Selecione</option>${opcoesDeEstado}</select>`,
               })}
             </div>
           </fieldset>
 
-          <fieldset data-campo="apoio">
+          <fieldset data-campo="apoio" aria-describedby="erro-apoio">
             <legend>Como deseja apoiar *</legend>
             <div class="opcoes">${radios}</div>
             <span class="campo__erro" id="erro-apoio"></span>
@@ -271,7 +271,7 @@ export function paginaCadastro({ estados, formasDeApoio, projetos }) {
 
           <fieldset data-campo="consentimento">
             <legend>Consentimento</legend>
-            <label class="opcao"><input type="checkbox" name="consentimento" value="sim" aria-describedby="erro-consentimento"> Autorizo o uso dos meus dados para contato pela ONG. *</label>
+            <label class="opcao"><input type="checkbox" name="consentimento" value="sim" aria-describedby="erro-consentimento" required> Autorizo o uso dos meus dados para contato pela ONG. *</label>
             <span class="campo__erro" id="erro-consentimento"></span>
           </fieldset>
 

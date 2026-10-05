@@ -7,11 +7,29 @@
   <title>ONG Mãos Solidárias</title>
   <link rel="icon" type="image/png" href="../imagens/logo.png">
   <link rel="stylesheet" href="../css/style.css">
+  <script>
+    // Aplica o tema salvo antes da primeira pintura, para a tela não piscar.
+    try {
+      var tema = JSON.parse(localStorage.getItem('maos-solidarias:tema'));
+      if (tema) document.documentElement.dataset.tema = tema;
+    } catch (erro) { /* sem armazenamento: segue no tema padrão */ }
+  </script>
   <script src="../js/vendor/chart.umd.min.js" defer></script>
   <script type="module" src="../js/main.js"></script>
 </head>
 <body>
   <a class="pular-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <aside class="barra-acessibilidade" aria-label="Preferências de acessibilidade">
+    <div class="container barra-acessibilidade__conteudo">
+      <label for="tema">Tema</label>
+      <select id="tema">
+        <option value="claro">Claro</option>
+        <option value="escuro">Escuro</option>
+        <option value="alto-contraste">Alto contraste</option>
+      </select>
+    </div>
+  </aside>
 
   <header class="cabecalho">
     <div class="container cabecalho__conteudo">
