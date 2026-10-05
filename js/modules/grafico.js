@@ -2,8 +2,28 @@
 // Este é o único módulo que conhece a biblioteca: o restante da aplicação
 // chama apenas desenharGraficoDeApoio().
 
+const URL_DA_BIBLIOTECA = '../js/vendor/chart.umd.min.js';
+
 let grafico = null;
 let ultimoDesenho = null; // guarda canvas e dados para redesenhar ao trocar o tema
+let carregamento = null;
+
+// A biblioteca (cerca de 200 kB) só é baixada quando a tela do gráfico é aberta,
+// e uma única vez. As outras páginas não pagam esse custo.
+function carregarBiblioteca() {
+  if (typeof window.Chart !== 'undefined') return Promise.resolve(true);
+  carregamento ??= new Promise((resolver) => {
+    const script = document.createElement('script');
+    script.src = URL_DA_BIBLIOTECA;
+    script.onload = () => resolver(true);
+    script.onerror = () => {
+      carregamento = null; // permite tentar de novo na próxima visita
+      resolver(false);
+    };
+    document.head.append(script);
+  });
+  return carregamento;
+}
 
 export function contarPorApoio(apoiadores) {
   return apoiadores.reduce((contagem, apoiador) => {
@@ -12,14 +32,24 @@ export function contarPorApoio(apoiadores) {
   }, {});
 }
 
-export function desenharGraficoDeApoio(canvas, apoiadores) {
-  // Remove o gráfico anterior: evita duplicatas e instâncias presas a um canvas que já saiu da tela.
+function destruirGrafico() {
   grafico?.destroy();
   grafico = null;
-  ultimoDesenho = canvas ? { canvas, apoiadores } : null;
+}
 
-  // Se a biblioteca não carregou, a página continua funcionando sem o gráfico.
-  if (!canvas || typeof window.Chart === 'undefined') return false;
+export async function desenharGraficoDeApoio(canvas, apoiadores) {
+  // Remove o gráfico anterior: evita duplicatas e instâncias presas a um canvas que já saiu da tela.
+  destruirGrafico();
+  ultimoDesenho = canvas ? { canvas, apoiadores } : null;
+  if (!canvas) return false;
+
+  // Se a biblioteca não carregar, a página continua funcionando sem o gráfico
+  // (os mesmos números aparecem em texto logo abaixo).
+  if (!(await carregarBiblioteca())) return false;
+
+  // Enquanto a biblioteca carregava, a rota pode ter mudado ou outro desenho pode ter começado.
+  if (!canvas.isConnected || ultimoDesenho?.canvas !== canvas) return false;
+  destruirGrafico();
 
   const contagem = contarPorApoio(apoiadores);
   const estilo = getComputedStyle(document.documentElement);
