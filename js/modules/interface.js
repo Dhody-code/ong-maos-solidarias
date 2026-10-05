@@ -33,6 +33,14 @@ const FOCAVEIS = 'a[href], button:not([disabled]), input, select, textarea, [tab
 let elementoAnterior = null;
 let aoFecharModal = null;
 
+// Com o modal aberto, o restante da página fica inerte: não recebe foco,
+// clique nem é lido pelo leitor de tela.
+function definirFundoInerte(inerte) {
+  document.querySelectorAll('body > :not(#modal):not(#toast):not(script)').forEach((elemento) => {
+    elemento.inert = inerte;
+  });
+}
+
 function prenderFoco(evento) {
   const modal = document.querySelector('#modal');
   if (evento.key === 'Escape') {
@@ -57,6 +65,7 @@ export function fecharModal(resultado = false) {
   if (!modal.classList.contains('modal--aberto')) return;
   modal.classList.remove('modal--aberto');
   modal.setAttribute('aria-hidden', 'true');
+  definirFundoInerte(false);
   document.body.classList.remove('sem-rolagem');
   document.removeEventListener('keydown', prenderFoco);
   elementoAnterior?.focus();
@@ -80,6 +89,7 @@ export function abrirModal({ titulo, conteudoHTML, acoes = [{ rotulo: 'Entendi',
 
   modal.classList.add('modal--aberto');
   modal.setAttribute('aria-hidden', 'false');
+  definirFundoInerte(true);
   document.body.classList.add('sem-rolagem'); // a página ao fundo não rola
   document.addEventListener('keydown', prenderFoco);
   modal.querySelector('#modal-acoes button').focus();
@@ -118,12 +128,19 @@ export function iniciarModal() {
 
 let temporizador = null;
 
-export function mostrarToast(mensagem, duracao = 5000) {
+let duracaoAtual = 6000;
+
+function agendarFechamento() {
+  clearTimeout(temporizador);
+  temporizador = setTimeout(esconderToast, duracaoAtual);
+}
+
+export function mostrarToast(mensagem, duracao = 6000) {
   const toast = document.querySelector('#toast');
   toast.querySelector('#toast-mensagem').textContent = mensagem;
   toast.classList.add('toast--visivel');
-  clearTimeout(temporizador);
-  temporizador = setTimeout(esconderToast, duracao);
+  duracaoAtual = duracao;
+  agendarFechamento();
 }
 
 export function esconderToast() {
@@ -131,5 +148,11 @@ export function esconderToast() {
 }
 
 export function iniciarToast() {
+  const toast = document.querySelector('#toast');
   document.querySelector('#toast-fechar').addEventListener('click', esconderToast);
+
+  // O aviso não some enquanto o mouse ou o foco do teclado estiver sobre ele,
+  // para dar tempo de leitura a quem precisa.
+  ['mouseenter', 'focusin'].forEach((tipo) => toast.addEventListener(tipo, () => clearTimeout(temporizador)));
+  ['mouseleave', 'focusout'].forEach((tipo) => toast.addEventListener(tipo, agendarFechamento));
 }

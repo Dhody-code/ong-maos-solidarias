@@ -604,12 +604,15 @@ img {
   background-color: rgba(31, 41, 51, 0.7);
   visibility: hidden;
   opacity: 0;
-  transition: opacity var(--transicao), visibility var(--transicao);
+  /* Ao fechar, a visibilidade só muda depois que a opacidade termina */
+  transition: opacity var(--transicao), visibility 0s linear 0.2s;
 }
 
 .modal--aberto {
   visibility: visible;
   opacity: 1;
+  /* Ao abrir, fica visível de imediato: assim o foco já pode entrar no modal */
+  transition: opacity var(--transicao), visibility 0s;
 }
 
 .modal__caixa {
@@ -958,7 +961,7 @@ fieldset.campo--erro > .campo__erro {
     visibility: hidden;
     opacity: 0;
     transform: translateY(-4px);
-    transition: opacity var(--transicao), transform var(--transicao), visibility var(--transicao);
+    transition: opacity var(--transicao), transform var(--transicao), visibility 0s linear 0.2s;
   }
 
   .menu__item--submenu:hover > .submenu,
@@ -966,6 +969,8 @@ fieldset.campo--erro > .campo__erro {
     visibility: visible;
     opacity: 1;
     transform: translateY(0);
+    /* visível de imediato, para o Tab alcançar os links do submenu */
+    transition: opacity var(--transicao), transform var(--transicao), visibility 0s;
   }
 
   .col-lg-3 { grid-column: span 3; }
