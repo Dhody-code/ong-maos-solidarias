@@ -88,6 +88,7 @@ body {
   line-height: var(--altura-linha-texto);
   color: var(--cor-neutra-900);
   background-color: var(--cor-neutra-100);
+  overflow-wrap: anywhere; /* e-mails e palavras longas quebram em telas estreitas */
 }
 
 h1,
@@ -172,15 +173,17 @@ img {
   background-color: var(--cor-branco);
 }
 
-/* Grid de 12 colunas: no celular cada item ocupa as 12 */
+/* Grid: uma coluna em telas estreitas e 12 colunas a partir de 576px.
+   minmax(0, 1fr) permite que as colunas encolham em vez de estourar a tela. */
 .grade {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--espaco-3);
 }
 
 .grade > * {
-  grid-column: span 12;
+  grid-column: 1 / -1;
+  min-width: 0;
 }
 
 .grade--centro {
@@ -708,6 +711,7 @@ img {
 }
 
 .formulario fieldset {
+  min-width: 0; /* por padrão o fieldset não encolhe abaixo do conteúdo */
   margin: 0;
   padding: var(--espaco-3);
   background-color: var(--cor-branco);
@@ -896,6 +900,14 @@ fieldset.campo--erro > .campo__erro {
 @media (min-width: 576px) {
   .container {
     padding-inline: var(--espaco-3);
+  }
+
+  .grade {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .grade > * {
+    grid-column: span 12;
   }
 
   .col-sm-6 { grid-column: span 6; }
